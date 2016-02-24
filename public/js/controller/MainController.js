@@ -1,5 +1,4 @@
-app.controller('MainController', function ($scope, $http) {
-
+app.controller('MainController', function ($scope, $http, $mdDialog) {
     $scope.formData = {};
     $scope.todos = [];
 
@@ -12,6 +11,9 @@ app.controller('MainController', function ($scope, $http) {
         });
 
     $scope.createTodo = function () {
+        if (!$scope.formData.text) {
+            return;
+        }
         $http.post('/api/todos', $scope.formData)
             .success(function (data) {
                 $scope.formData = {};
@@ -33,12 +35,24 @@ app.controller('MainController', function ($scope, $http) {
     };
 
     $scope.doneTodo = function (id, value) {
-        $http.post('/api/todos/done/' + id, {done: value})
+        $http.post('/api/todos/done/' + id, {done: !value})
             .success(function (data) {
                 $scope.todos = data;
             })
             .error(function () {
                 console.log('Error:' + data);
             });
-    }
+    };
+
+    $scope.deleteAction = function (id) {
+        var confirm = $mdDialog.confirm()
+            .title('Aufgabe löschen')
+            .textContent('Soll diese Aufgabe gelöscht werden?')
+            .ariaLabel('Aufgabe löschen')
+            .ok('Löschen')
+            .cancel('Abbrechen');
+        $mdDialog.show(confirm).then(function () {
+            $scope.deleteTodo(id);
+        });
+    };
 });
