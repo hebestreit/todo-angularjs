@@ -1,0 +1,34 @@
+<!doctype html>
+<html ng-app="todoApp">
+<head>
+    <title>Todo</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+<div ng-controller="MainController">
+    <div id="todo-form">
+        <form ng-submit="createTodo()">
+            <input type="text" placeholder="Clean up my untidy room!" ng-model="formData.text"/>
+            <button type="submit">Create</button>
+        </form>
+    </div>
+    <div id="todo-list">
+        <div class="todo" ng-repeat="todo in todos">
+            <label>
+                <input type="checkbox" ng-click="doneTodo(todo._id, todo.done)" ng-model="todo.done"> {{todo.text}}
+            </label>
+            <span ng-click="deleteTodo(todo._id)">[X]</span>
+        </div>
+    </div>
+</div>
+
+<!-- Angular -->
+<script src="bower_components/angular/angular.min.js"></script>
+<!-- App -->
+<script src="js/app.js"></script>
+<!-- Controller -->
+<script src="js/controller/MainController.js"></script>
+</body>
+</html>

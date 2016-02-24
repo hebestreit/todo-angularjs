@@ -4,6 +4,7 @@
   "description": "A simple Todo AngularJs application",
   "main": "index.js",
   "dependencies": {
+    "body-parser": "^1.15.0",
     "mongoose": "^4.4.5"
   },
   "devDependencies": {},
