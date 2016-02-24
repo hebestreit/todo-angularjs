@@ -1,0 +1,23 @@
+{
+  "name": "todo-angularjs",
+  "version": "1.0.0",
+  "description": "A simple Todo AngularJs application",
+  "main": "index.js",
+  "dependencies": {
+    "mongoose": "^4.4.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hebestreit/todo-angularjs.git"
+  },
+  "author": "Daniel Hebestreit",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hebestreit/todo-angularjs/issues"
+  },
+  "homepage": "https://github.com/hebestreit/todo-angularjs#readme"
+}

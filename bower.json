@@ -1,0 +1,21 @@
+{
+  "name": "todo-angularjs",
+  "description": "A simple Todo AngularJs application",
+  "main": "index.js",
+  "authors": [
+    "Daniel Hebestreit"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/hebestreit/todo-angularjs",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "angularjs#^1.5.0"
+  }
+}
