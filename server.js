@@ -27,6 +27,9 @@ app.get('/api/todos', function (req, res) {
 });
 
 app.post('/api/todos', function (req, res) {
+    if (!req.body.text) {
+        return;
+    }
     Todo.create({
         text: req.body.text,
         done: false
