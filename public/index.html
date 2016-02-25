@@ -4,45 +4,15 @@
     <title>Todo</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <base href="/" />
     <link rel="stylesheet" href="bower_components/angular-material/angular-material.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body ng-cloak>
-
-<div ng-controller="MainController" layout="column">
-    <md-toolbar md-scroll-shrink ng-controller="TitleController">
-        <div class="md-toolbar-tools">
-            <h3>
-                <span>{{title}}</span>
-            </h3>
-        </div>
-    </md-toolbar>
-    <md-content layout-gt-sm="row" layout-padding flex>
-        <div id="todo-form">
-            <form ng-submit="createTodo()">
-                <md-input-container md-no-float>
-                    <input md-maxlength="80" required placeholder="Was ist zu tun?" ng-model="formData.text"/>
-                </md-input-container>
-
-                <md-button class="md-fab" aria-label="Create a task" ng-click="createTodo()">
-                    <md-icon>done</md-icon>
-                </md-button>
-            </form>
-        </div>
-    </md-content>
-    <md-content>
-        <md-subheader class="md-no-sticky">Meine Aufgaben</md-subheader>
-        <md-list-item ng-repeat="todo in todos" md-swipe-right="doneTodo(todo._id, todo.done)" md-swipe-left="deleteAction(todo._id)">
-            <md-checkbox ng-click="doneTodo(todo._id, todo.done)" ng-model="todo.done"></md-checkbox>
-            <p>{{todo.text}}</p>
-            <md-icon class="md-secondary" ng-click="deleteAction(todo._id)" aria-label="Delete">delete</md-icon>
-        </md-list-item>
-        <md-divider></md-divider>
-    </md-content>
-</div>
+<div ng-view></div>
 <!-- Angular -->
 <script src="bower_components/angular/angular.min.js"></script>
+<script src="bower_components/angular-route/angular-route.min.js"></script>
 
 <!--Angular Material-->
 <script type="text/javascript" src="bower_components/angular-aria/angular-aria.js"></script>
@@ -54,5 +24,6 @@
 <!-- Controller -->
 <script src="js/controller/MainController.js"></script>
 <script src="js/controller/TitleController.js"></script>
+<script src="js/controller/CategoriesController.js"></script>
 </body>
 </html>

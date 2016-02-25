@@ -1,0 +1,31 @@
+<div layout="column">
+    <md-toolbar md-scroll-shrink ng-controller="TitleController">
+        <div class="md-toolbar-tools">
+            <h3>
+                <span>{{title}}</span>
+            </h3>
+        </div>
+    </md-toolbar>
+    <md-content layout-gt-sm="row" layout-padding flex>
+        <div id="todo-form">
+            <form ng-submit="createTodo()">
+                <md-input-container md-no-float>
+                    <input md-maxlength="80" required placeholder="Was ist zu tun?" ng-model="formData.text"/>
+                </md-input-container>
+
+                <md-button class="md-fab" aria-label="Create a task" ng-click="createTodo()">
+                    <md-icon>done</md-icon>
+                </md-button>
+            </form>
+        </div>
+    </md-content>
+    <md-content>
+        <md-subheader class="md-no-sticky">Meine Aufgaben</md-subheader>
+        <md-list-item ng-repeat="todo in todos" md-swipe-right="doneTodo(todo._id, todo.done)" md-swipe-left="deleteAction(todo._id)">
+            <md-checkbox ng-click="doneTodo(todo._id, todo.done)" ng-model="todo.done"></md-checkbox>
+            <p>{{todo.text}}</p>
+            <md-icon class="md-secondary" ng-click="deleteAction(todo._id)" aria-label="Delete">delete</md-icon>
+        </md-list-item>
+        <md-divider></md-divider>
+    </md-content>
+</div>
