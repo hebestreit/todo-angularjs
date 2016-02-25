@@ -12,12 +12,23 @@ module.exports = function (app) {
         });
     });
 
+    app.get('/api/categories/:id', function (req, res) {
+        Category.findOne({_id: req.params.id}, function (err, category) {
+            if (err) {
+                res.send(err);
+                return;
+            }
+            res.json(category);
+        });
+    });
+
     app.post('/api/categories', function (req, res) {
         if (!req.body.title) {
             return;
         }
         Category.create({
-            title: req.body.title
+            title: req.body.title,
+            icon: req.body.icon
         }, function (err, category) {
             if (err) {
                 res.send(err);
@@ -34,10 +45,13 @@ module.exports = function (app) {
         })
     });
 
-    app.post('/api/categories/update/:category_id', function (req, res) {
+    app.post('/api/categories/:id/update', function (req, res) {
         Category.update(
-            {_id: req.params.category_id},
-            {title: req.body.title}
+            {_id: req.params.id},
+            {
+                title: req.body.title,
+                icon: req.body.icon
+            }
             , function (err, category) {
                 if (err) {
                     res.send(err);
@@ -54,9 +68,9 @@ module.exports = function (app) {
             })
     });
 
-    app.delete('/api/categories/:category_id', function (req, res) {
+    app.delete('/api/categories/:id', function (req, res) {
         Category.remove({
-            _id: req.params.category_id
+            _id: req.params.id
         }, function (err, category) {
             if (err) {
                 res.send(err);

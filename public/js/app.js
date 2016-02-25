@@ -10,7 +10,16 @@ var app = angular.module('todoApp', ['ngMaterial', 'ngRoute'])
             .when('/categories', {
                 templateUrl: 'views/categories/index.html',
                 controller: 'CategoriesController'
-            }).otherwise({redirectTo: '/'});
+            })
+            .when('/categories/new', {
+                templateUrl: 'views/categories/new.html',
+                controller: 'CategoriesNewController'
+            })
+            .when('/categories/:id/edit', {
+                templateUrl: 'views/categories/edit.html',
+                controller: 'CategoriesEditController'
+            })
+            .otherwise({redirectTo: '/'});
 
         $mdThemingProvider
             .theme('default')

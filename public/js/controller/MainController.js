@@ -1,6 +1,10 @@
-app.controller('MainController', function ($scope, $http, $mdDialog) {
+app.controller('MainController', function ($scope, $http, $location, $mdDialog) {
     $scope.formData = {};
     $scope.todos = [];
+
+    $scope.openCategories = function () {
+        $location.path('/categories');
+    };
 
     $http.get('/api/todos')
         .success(function (data) {
