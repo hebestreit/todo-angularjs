@@ -13,8 +13,16 @@
     <md-content layout-gt-sm="row" layout-padding flex>
         <div id="todo-form">
             <form ng-submit="createTodo()">
+                <md-input-container>
+                    <label>Kategorie</label>
+                    <md-select ng-model="formData.categoryId">
+                        <md-option ng-repeat="category in categories" value="{{category._id}}">
+                            {{category.title}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
                 <md-input-container md-no-float>
-                    <input md-maxlength="80" required placeholder="Was ist zu tun?" ng-model="formData.text"/>
+                    <input required placeholder="Was ist zu tun?" ng-model="formData.text"/>
                 </md-input-container>
 
                 <md-button class="md-fab" aria-label="Create a task" ng-click="createTodo()">
@@ -24,12 +32,14 @@
         </div>
     </md-content>
     <md-content>
-        <md-subheader class="md-no-sticky">Meine Aufgaben</md-subheader>
-        <md-list-item ng-repeat="todo in todos" md-swipe-right="doneTodo(todo._id, todo.done)" md-swipe-left="deleteAction(todo._id)">
-            <md-checkbox ng-click="doneTodo(todo._id, todo.done)" ng-model="todo.done"></md-checkbox>
-            <p>{{todo.text}}</p>
-            <md-icon class="md-secondary" ng-click="deleteAction(todo._id)" aria-label="Delete">delete</md-icon>
-        </md-list-item>
-        <md-divider></md-divider>
+        <div ng-repeat="(key, value) in todos | groupBy: 'categoryId'">
+            <md-subheader class="md-no-sticky">{{getCategoryById(key).title}}</md-subheader>
+            <md-list-item ng-repeat="todo in value" md-swipe-right="doneTodo(todo._id, todo.done)" md-swipe-left="deleteAction(todo._id)">
+                <md-checkbox ng-click="doneTodo(todo._id, todo.done)" ng-model="todo.done"></md-checkbox>
+                <p>{{todo.text}}</p>
+                <md-icon class="md-secondary" ng-click="deleteAction(todo._id)" aria-label="Delete">delete</md-icon>
+            </md-list-item>
+            <md-divider></md-divider>
+        </div>
     </md-content>
 </div>

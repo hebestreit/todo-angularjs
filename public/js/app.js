@@ -1,4 +1,4 @@
-var app = angular.module('todoApp', ['ngMaterial', 'ngRoute'])
+var app = angular.module('todoApp', ['ngMaterial', 'ngRoute', 'angular.filter'])
     .config(function ($routeProvider, $locationProvider, $mdThemingProvider) {
         $locationProvider.html5Mode(true);
 
