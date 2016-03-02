@@ -11,4 +11,8 @@ app.controller('CategoriesController', function ($scope, $location, CategoryServ
     $scope.createCategory = function () {
         $location.path('/categories/new');
     };
+
+    $scope.goBack = function () {
+        $location.path('/');
+    }
 });

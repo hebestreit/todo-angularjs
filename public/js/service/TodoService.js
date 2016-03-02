@@ -1,10 +1,10 @@
 app.factory('TodoService', function ($http) {
     return {
-        create: function (todos) {
-            if (!todos.title) {
+        create: function (todo) {
+            if (!todo.text) {
                 return false;
             }
-            $http.post('/api/todos', todos);
+            return $http.post('/api/todos', todo);
         },
         getTodos: function () {
             return $http.get('/api/todos');
@@ -12,17 +12,20 @@ app.factory('TodoService', function ($http) {
         getTodo: function (id) {
             return $http.get('/api/todos/' + id);
         },
-        save: function (todos) {
-            if (!todos.title) {
+        done: function (id, value) {
+            if (!id) {
                 return false;
             }
-            return $http.post('/api/todos/' + todos._id + '/update', todos);
+            return $http.post('/api/todos/' + id + '/done', {done: value});
+        },
+        save: function (todo) {
+            if (!todo.text) {
+                return false;
+            }
+            return $http.post('/api/todos/' + todo._id + '/update', todo);
         },
         delete: function (id) {
             return $http.delete('/api/todos/' + id);
-        },
-        getTodosByCategoryId: function (categoryId) {
-            return $http.get('/api/todos/byCategory/' + categoryId);
         }
     }
 });

@@ -4,7 +4,7 @@ app.factory('CategoryService', function ($http) {
             if (!category.title) {
                 return false;
             }
-            $http.post('/api/categories', category);
+            return $http.post('/api/categories', category);
         },
         getCategories: function () {
             return $http.get('/api/categories');
@@ -31,6 +31,9 @@ app.factory('CategoryService', function ($http) {
                 {src: 'grade', name: 'Stern'},
                 {src: 'local_dining', name: 'Essen'}
             ];
+        },
+        getDefaultCategory: function () {
+            return {'_id': '', title: 'Allgemein', icon: 'inbox'};
         }
     }
 });

@@ -36,7 +36,7 @@ module.exports = function (app) {
         })
     });
 
-    app.post('/api/todos/done/:id', function (req, res) {
+    app.post('/api/todos/:id/done', function (req, res) {
         Todo.update(
             {_id: req.params.id},
             {done: req.body.done}

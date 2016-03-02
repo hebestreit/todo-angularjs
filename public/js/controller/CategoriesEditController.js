@@ -33,4 +33,8 @@ app.controller('CategoriesEditController', function ($scope, $routeParams, $loca
             $location.path('/categories');
         });
     };
+
+    $scope.goBack = function () {
+        $location.path('/categories');
+    }
 });

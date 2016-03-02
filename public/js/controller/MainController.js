@@ -1,4 +1,4 @@
-app.controller('MainController', function ($scope, $http, $location, $mdDialog, TodoService, CategoryService, $filter) {
+app.controller('MainController', function ($scope, $location, $mdDialog, TodoService, CategoryService, $filter) {
     $scope.formData = {
         categoryId: ''
     };
@@ -11,53 +11,34 @@ app.controller('MainController', function ($scope, $http, $location, $mdDialog, 
 
     CategoryService.getCategories().success(function (collection) {
         $scope.categories = collection;
-        $scope.categories.unshift({'_id': '', title: 'Allgemein'});
+        $scope.categories.unshift(CategoryService.getDefaultCategory());
     });
 
     $scope.getCategoryById = function (categoryId) {
         return $filter('filter')($scope.categories, {'_id': categoryId})[0];
     };
 
-    $http.get('/api/todos')
-        .success(function (data) {
-            $scope.todos = data;
-        })
-        .error(function () {
-            console.log('Error:' + data);
-        });
+    TodoService.getTodos().success(function (collection) {
+        $scope.todos = collection;
+    });
 
-    $scope.createTodo = function () {
-        if (!$scope.formData.text) {
-            return;
-        }
-        $http.post('/api/todos', $scope.formData)
-            .success(function (data) {
-                $scope.formData = {};
-                $scope.todos = data;
-            })
-            .error(function () {
-                console.log('Error:' + data);
-            });
+    $scope.saveTodo = function () {
+        TodoService.create($scope.formData).success(function (data) {
+            $scope.formData = {};
+            $scope.todos = data;
+        });
     };
 
     $scope.deleteTodo = function (id) {
-        $http.delete('/api/todos/' + id)
-            .success(function (data) {
-                $scope.todos = data;
-            })
-            .error(function () {
-                console.log('Error:' + data);
-            });
+        TodoService.delete(id).success(function (data) {
+            $scope.todos = data;
+        });
     };
 
     $scope.doneTodo = function (id, value) {
-        $http.post('/api/todos/done/' + id, {done: !value})
-            .success(function (data) {
-                $scope.todos = data;
-            })
-            .error(function () {
-                console.log('Error:' + data);
-            });
+        TodoService.done(id, !value).success(function (data) {
+            $scope.todos = data;
+        });
     };
 
     $scope.deleteAction = function (id) {

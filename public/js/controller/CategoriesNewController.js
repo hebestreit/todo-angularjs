@@ -10,4 +10,8 @@ app.controller('CategoriesNewController', function ($scope, CategoryService, $lo
         CategoryService.create($scope.category);
         $location.path('/categories');
     };
+
+    $scope.goBack = function () {
+        $location.path('/categories');
+    }
 });

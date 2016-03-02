@@ -6,17 +6,18 @@
             </h3>
             <span flex></span>
             <md-button ng-click="openCategories()">
-                <md-icon>folder</md-icon>
+                <md-icon>folder</md-icon> Kategorien
             </md-button>
         </div>
     </md-toolbar>
     <md-content layout-gt-sm="row" layout-padding flex>
         <div id="todo-form">
-            <form ng-submit="createTodo()">
+            <form ng-submit="saveTodo()">
                 <md-input-container>
                     <label>Kategorie</label>
                     <md-select ng-model="formData.categoryId">
                         <md-option ng-repeat="category in categories" value="{{category._id}}">
+                            <md-icon>{{category.icon}}</md-icon>
                             {{category.title}}
                         </md-option>
                     </md-select>
@@ -25,15 +26,15 @@
                     <input required placeholder="Was ist zu tun?" ng-model="formData.text"/>
                 </md-input-container>
 
-                <md-button class="md-fab" aria-label="Create a task" ng-click="createTodo()">
+                <md-button class="md-fab" aria-label="Create a task" ng-click="saveTodo()">
                     <md-icon>add</md-icon>
                 </md-button>
             </form>
         </div>
     </md-content>
     <md-content>
-        <div ng-repeat="(key, value) in todos | groupBy: 'categoryId'">
-            <md-subheader class="md-no-sticky">{{getCategoryById(key).title}}</md-subheader>
+        <div ng-repeat="(key, value) in todos | groupBy: 'categoryId'" ng-init="category = getCategoryById(key)">
+            <md-subheader class="md-no-sticky"><md-icon>{{category.icon}}</md-icon> {{category.title}}</md-subheader>
             <md-list-item ng-repeat="todo in value" md-swipe-right="doneTodo(todo._id, todo.done)" md-swipe-left="deleteAction(todo._id)">
                 <md-checkbox ng-click="doneTodo(todo._id, todo.done)" ng-model="todo.done"></md-checkbox>
                 <p>{{todo.text}}</p>
