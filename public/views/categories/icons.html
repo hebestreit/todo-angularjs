@@ -1,0 +1,8 @@
+<md-list layout="row" layout-align="center center">
+    <md-list-item ng-repeat="icon in icons">
+        <md-button class="md-grid-item-content" ng-class="{'md-primary': category.icon === icon.src}" ng-click="selectIcon(icon.src)">
+            <md-icon>{{icon.src}}</md-icon>
+            <div class="md-grid-text"> {{ icon.name }}</div>
+        </md-button>
+    </md-list-item>
+</md-list>

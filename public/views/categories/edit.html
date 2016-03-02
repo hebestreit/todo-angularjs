@@ -1,0 +1,30 @@
+<div layout="column">
+    <md-toolbar md-scroll-shrink>
+        <div class="md-toolbar-tools">
+            <md-button class="md-icon-button" aria-label="Zurück" ng-click="goBack()">
+                <md-icon>arrow_back</md-icon>
+            </md-button>
+            <h3>
+                <span>Kategorie bearbeiten</span>
+            </h3>
+            <span flex></span>
+            <md-button ng-click="deleteAction()">
+                <md-icon>delete</md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-content layout-padding>
+        <div>
+            <form>
+                <md-input-container class="md-block">
+                    <label>Titel</label>
+                    <input ng-model="category.title">
+                </md-input-container>
+                <div ng-include src="'views/categories/icons.html'"></div>
+
+                <md-button class="md-raised" ng-href="/categories">Zurück</md-button>
+                <md-button class="md-raised md-primary" ng-click="saveCategory()">Speichern</md-button>
+            </form>
+        </div>
+    </md-content>
+</div>
