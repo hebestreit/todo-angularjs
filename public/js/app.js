@@ -1,5 +1,5 @@
-var app = angular.module('todoApp', ['ngMaterial', 'ngRoute', 'angular.filter'])
-    .config(function ($routeProvider, $locationProvider, $mdThemingProvider) {
+var app = angular.module('todoApp', ['ngMaterial', 'ngRoute', 'angular.filter', 'LocalStorageModule'])
+    .config(function ($routeProvider, $locationProvider, $mdThemingProvider, localStorageServiceProvider) {
         $locationProvider.html5Mode(true);
 
         $routeProvider
@@ -26,4 +26,6 @@ var app = angular.module('todoApp', ['ngMaterial', 'ngRoute', 'angular.filter'])
             .primaryPalette("indigo")
             .accentPalette('blue')
             .warnPalette('red');
+
+        localStorageServiceProvider.setPrefix('Todo');
     });
